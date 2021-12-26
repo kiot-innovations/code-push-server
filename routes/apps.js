@@ -280,6 +280,18 @@ router.delete('/:appName/deployments/:deploymentName', middleware.checkToken, (r
         });
 });
 
+/**
+ * packageInfo: {JsonString}
+            * appVersion?: string;
+            description?: string;
+            isDisabled?: boolean;
+            isMandatory?: boolean;
+            label?: string;
+            packageHash?: string;
+            rollout?: number;
+   package: File.zip
+
+*/
 router.post(
     '/:appName/deployments/:deploymentName/release',
     middleware.checkToken,
@@ -747,7 +759,20 @@ router.post('/:appName/transfer/:email', middleware.checkToken, (req, res, next)
             }
         });
 });
-
+/**
+ * Payload -
+ *  id?: string;
+  app_secret?: string;
+  azure_subscription_id?: string;
+  description?: string;
+  display_name?: string;
+  icon_url?: string;
+  name?: string;
+  os?: AppOs;
+  owner?: Owner;
+  platform?: AppPlatform;
+  origin?: AppOrigin;
+ */
 router.post('/', middleware.checkToken, (req, res, next) => {
     log.debug('addApp params:', req.body);
     var constName = require('../core/const');

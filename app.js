@@ -46,6 +46,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 log.debug('set Access-Control Header');
 app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
+    res.header('Bypass-Tunnel-Reminder', '*');
     res.header(
         'Access-Control-Allow-Headers',
         'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CodePush-Plugin-Version, X-CodePush-Plugin-Name, X-CodePush-SDK-Version',
@@ -94,6 +95,7 @@ app.use('/apps', apps);
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+    log.level = "debug";
     app.use(function (req, res, next) {
         var err = new AppError.NotFound(`${req.method} ${req.url}`);
         res.status(err.status || 404);
