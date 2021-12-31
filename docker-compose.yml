@@ -1,26 +1,15 @@
 version: '3.7'
 services:
-  # server:
-  #   image: shmopen/code-push-server:latest
-  #   volumes:
-  #     - data-storage:/data/storage
-  #     - data-tmp:/data/tmp
-  #   environment:
-  #     DOWNLOAD_URL: 'https://silent-mouse-100.loca.lt/download'
-  #     TOKEN_SECRET: 'SMETHING'
-  #     RDS_HOST: 'mysql'
-  #     RDS_USERNAME: 'codepush'
-  #     RDS_PASSWORD: '123456'
-  #     RDS_DATABASE: 'codepush'
-  #     STORAGE_DIR: '/data/storage'
-  #     DATA_DIR: '/data/tmp'
-  #     NODE_ENV: 'production'
-  #     REDIS_HOST: 'redis'
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - mysql
-  #     - redis
+  code-push-server:
+    image: code-push-server
+    volumes:
+      - data-storage:/data/storage
+      - data-tmp:/data/tmp
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mysql
+      - redis
   mysql:
     image: mysql:latest
     volumes:

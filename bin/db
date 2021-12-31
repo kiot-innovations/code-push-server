@@ -35,7 +35,7 @@ var argv = yargs
         dbname: 'codepush',
         dbhost: 'localhost',
         dbuser: 'root',
-        dbpassword: null,
+        dbpassword: "12345678",
     })
     .help('h')
     .alias('h', 'help')
