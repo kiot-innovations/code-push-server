@@ -1,10 +1,27 @@
 version: '3.7'
 services:
   code-push-server:
-    image: code-push-server
+    image: ghcr.io/kiot-innovations/code-push-server:0.0.2
     volumes:
       - data-storage:/data/storage
       - data-tmp:/data/tmp
+    environment:
+      NODE_ENV: "${NODE_ENV}"
+      RDS_HOST: ${RDS_HOST}
+      RDS_DATABASE: ${RDS_DATABASE}
+      RDS_USERNAME: ${RDS_USERNAME}
+      RDS_PASSWORD: ${RDS_PASSWORD}
+      STORAGE_DIR: ${STORAGE_DIR}
+      LOCAL_DOWNLOAD_URL: ${LOCAL_DOWNLOAD_URL}
+      TOKEN_SECRET: ${TOKEN_SECRET}
+      DATA_DIR: ${DATA_DIR}
+      REDIS_HOST: ${REDIS_HOST}
+      AWS_ACCESS_KEY_ID:  ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
+      BUCKET_NAME: ${BUCKET_NAME}
+      REGION: ${REGION}
+      DOWNLOAD_URL: ${DOWNLOAD_URL}
     ports:
       - '3000:3000'
     depends_on:
@@ -13,7 +30,7 @@ services:
   mysql:
     image: mysql:latest
     volumes:
-      - data-mysql:/var/lib/mysql
+      - data-mysql2:/var/lib/mysql
       - ./sql/codepush-all-docker.sql:/docker-entrypoint-initdb.d/codepush-all.sql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'On'
@@ -28,5 +45,5 @@ services:
 volumes:
   data-storage:
   data-tmp:
-  data-mysql:
+  data-mysql2:
   data-redis:

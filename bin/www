@@ -14,6 +14,7 @@ log4js.configure(
     _.get(config, 'log4js', {
         appenders: { console: { type: 'console' } },
         categories: { default: { appenders: ['console'], level: 'info' } },
+        pm2: true
     }),
 );
 var log = log4js.getLogger('startup');
@@ -71,6 +72,7 @@ models.Versions.findOne({ where: { type: 1 } })
         } else {
             log.error(e);
         }
+        console.log(e, "P1");
         process.exit(1);
     });
 
@@ -109,10 +111,12 @@ function onError(error) {
     switch (error.code) {
         case 'EACCES':
             log.error(bind + ' requires elevated privileges');
+            console.log(error, "P2");
             process.exit(1);
             break;
         case 'EADDRINUSE':
             log.error(bind + ' is already in use');
+            console.log(error, "P3");
             process.exit(1);
             break;
         default:
