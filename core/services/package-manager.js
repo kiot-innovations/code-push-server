@@ -712,7 +712,7 @@ proto.rollbackPackage = function (deploymentVersionId, targetLabel, rollbackUid)
     var self = this;
     return models.DeploymentsVersions.findByPk(deploymentVersionId).then((deploymentsVersions) => {
         if (!deploymentsVersions) {
-            throw new AppError.AppError('您之前还没有发布过版本');
+            throw new AppError.AppError('Deployment Version not found');
         }
         return models.Packages.findByPk(deploymentsVersions.current_package_id)
             .then((currentPackageInfo) => {
@@ -741,7 +741,7 @@ proto.rollbackPackage = function (deploymentVersionId, targetLabel, rollbackUid)
                         }
                     }
                 }
-                throw new AppError.AppError('没有可供回滚的版本');
+                throw new AppError.AppError('Version not available');
             })
             .then((rollbackPackage) => {
                 var params = {
