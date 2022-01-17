@@ -1,5 +1,5 @@
 {
-  "name": "@kiot-innovations/code-push-core",
+  "name": "@kiot-innovations/code-push-server",
   "description": "CodePush service is hotupdate services which adapter react-native-code-push and cordova-plugin-code-push",
   "version": "1.0.0",
   "license": "MIT",
